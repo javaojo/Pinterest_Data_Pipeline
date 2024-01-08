@@ -2,7 +2,7 @@
 
 ## Table of contents
 
-- [Project Brief](https://github.com/javaojo/pinterest-data-pipeline/master#project-brief)
+- [Project Brief](https://github.com/javaojo/pinterest-data-pipeline/tree/master#project-brief)
 - [Project Dependencies](https://github.com/javaojo/pinterest-data-pipeline/tree/main#project-dependencies)
 - [The data](https://github.com/javaojo/pinterest-data-pipeline/tree/main#the-data)
 - [Tools used](https://github.com/javaojo/pinterest-data-pipeline/tree/main#tools-used)
