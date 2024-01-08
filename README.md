@@ -80,7 +80,7 @@ user_data:
 
 ## Architecture Overview
 
-<img src="AWS_Images/CloudPinterestPipeline.png" alt="pinterest data pipeline overview"/>
+<img src="AWS_AWS_Images/CloudPinterestPipeline.png" alt="pinterest data pipeline overview"/>
 
 ## Building the pipeline
 
@@ -92,11 +92,11 @@ The first stop in the pipeline for our data will be an Apache Kafka cluster in t
 2. From the MSK menu, click on 'Create cluster' to start the process.
 3. Here, choose from 'quick' or 'custom' create options and name the cluster:
 
-<img src="images/apache-msk-1.png" alt="create Apache cluster" width="500"/>
+<img src="AWS_Images/apache-msk-1.png" alt="create Apache cluster" width="500"/>
 
 4. Scroll down and choose 'Provisioned' and specify the Kafka version and broker type. The type chosen will depend on requirements and cost considerations.
 
-<img src="images/apache-msk-2.png" alt="kafka provisioned and broker type" width="500"/>
+<img src="AWS_Images/apache-msk-2.png" alt="kafka provisioned and broker type" width="500"/>
 
 5. Finally, scroll down and click 'Create cluster'. The cluster can take between 15 and 20 minutes to create. When the cluster has been created, navigate to the 'Properties' tab, locate the network settings and take note of the security group associated with the cluster. Next, click on 'View client information' and take a note of the bootstrap servers.
 
@@ -106,16 +106,16 @@ Once the cluster is up and running, a client is needed to communicate with it. I
 
 1. Navigate to the EC2 dashboard and click on 'Launch Instance':
 
-<img src="images/ec2-launch-instance.png" alt="launch ec2 instance" width="500"/>
+<img src="AWS_Images/ec2-launch-instance.png" alt="launch ec2 instance" width="500"/>
 
 2. Give the instance a name, e.g. 'pinterest-kafka-client'.
-3. Keep the default Application and OS images, and instance type. Again, this choice may be determined by usage and cost considerations.
+3. Keep the default Application and OS AWS_Images, and instance type. Again, this choice may be determined by usage and cost considerations.
 
-<img src="images/ec2-OS-images.png" alt="ec2 OS image options" width="500"/>
+<img src="AWS_Images/ec2-OS-AWS_Images.png" alt="ec2 OS image options" width="500"/>
 
 4. Create a new keypair for connecting securely to the instance via SSH. Give the keypair a descriptive name and choose 'RSA' and '.pem' for the type and file format, respectively. The .pem file will automatically download - keep this file safe for later use.
 
-<img src="images/ec2-key-pair.png" alt="ec2 key pair options" width="500"/>
+<img src="AWS_Images/ec2-key-pair.png" alt="ec2 key pair options" width="500"/>
 
 5. Keep the default settings for the other sections. Click on 'Launch Instance' in the right-hand summary menu.
 
@@ -192,7 +192,7 @@ We also need to create an IAM role for the client machine.
 
 1. Once the new instance is running, connect via SSH to interact with the instance using the command line. To do this, click on the instance ID to open the summary page, then click on 'Connect':
 
-<img src="images/connect-to-ec2.png" alt="ec2 connect" width="500"/>
+<img src="AWS_Images/connect-to-ec2.png" alt="ec2 connect" width="500"/>
 
 2. Follow the instructions in the 'SSH' tab to connect to the instance.
 
@@ -316,7 +316,7 @@ client.sasl.client.callback.handler.class = software.amazon.msk.auth.iam.IAMClie
 
 The inbound rules for the client security group also need to be modified to allow incoming HTTP requests on port 8082. On the AWS 'Security groups' page, choose the security group attached to the client, and add the following inbound rule:
 
-<img src="images/client-http-inbound-rules.png" alt="ec2 connect" width="1000"/>
+<img src="AWS_Images/client-http-inbound-rules.png" alt="ec2 connect" width="1000"/>
 
 To start the REST API, navigate to the `confluent-7.2.0/bin` folder and run the following command:
 
@@ -338,27 +338,27 @@ Navigate to the AWS API Gateway service. This project uses a REST API.
 
 1. Click on 'Build' in the REST API box:
 
-<img src="images/rest-api-build.png" alt="ec2 connect" width="1000"/>
+<img src="AWS_Images/rest-api-build.png" alt="ec2 connect" width="1000"/>
 
 2. Choose 'REST', 'New API', give the API a descriptive name, then click on 'Create API':
 
-<img src="images/rest-api-build-2.png" alt="ec2 connect" width="500"/>
+<img src="AWS_Images/rest-api-build-2.png" alt="ec2 connect" width="500"/>
 
 3. From the 'Actions' menu, choose 'Create resource'. Select 'Configure as proxy resource' and 'Enable API Gateway CORS' boxes, then click on 'Create resource':
 
-<img src="images/rest-api-create-resource.png" alt="ec2 connect" width="1000"/>
+<img src="AWS_Images/rest-api-create-resource.png" alt="ec2 connect" width="1000"/>
 
 4. On the next page, set up HTTP Proxy, using the address for earlier as the endpoint, "http://your-client-public-dns:8082/{proxy}":
 
-<img src="images/rest-api-create-method.png" alt="ec2 connect" width="1000"/>
+<img src="AWS_Images/rest-api-create-method.png" alt="ec2 connect" width="1000"/>
 
 5. With the resource and method created, it's possible to test the API (make sure that the REST proxy on the client is running and listening for requests). If everything is working correctly, the following test should result in a 200 response code and the same response body obtained through the browser:
 
-<img src="images/rest-api-test-method.png" alt="ec2 connect" width="500"/>
+<img src="AWS_Images/rest-api-test-method.png" alt="ec2 connect" width="500"/>
 
 6. Now the API needs to be deployed. From the 'Actions' menu, select 'Deploy API'. Choose 'New stage' and give the stage a name, then click on 'Deploy':
 
-<img src="images/rest-api-deploy.png" alt="ec2 connect" width="500"/>
+<img src="AWS_Images/rest-api-deploy.png" alt="ec2 connect" width="500"/>
 
 This completes the process and an invoke URL is generated that can then be used for POST requests.
 
@@ -478,7 +478,7 @@ The role should have the following trust relationship:
 
 The next step is to create a VPC endpoint to S3. From the VPC dashboard in AWS, select 'Endpoints' from the left-hand menu then click on 'Create endpoint'. Give the endpoint a descriptive name, then select 'AWS services'. Search for 'S3' in the 'Services' search field, then select:
 
-<img src="images/vpc-endpoint.png" alt="vpc-endpoint-creation" width="1000">
+<img src="AWS_Images/vpc-endpoint.png" alt="vpc-endpoint-creation" width="1000">
 
 Choose the default VPC for the region, click the check box next to the default route tables, then click on 'Create endpoint'.
 
@@ -488,7 +488,7 @@ We're now ready to create the connector. The first step is to create a new plugi
 2. In the AWS MSK dashboard, select 'Custom plugins' from the left-hand menu, then click on 'Create custom plugin'.
 3. In the next window, navigate to the S3 bucket where the .zip is stored, and select the .zip file:
 
-<img src="images/custom-plugin.png" alt="custom-plugin-creation" width="500">
+<img src="AWS_Images/custom-plugin.png" alt="custom-plugin-creation" width="500">
 
 4. Click on 'Create custom plugin'. The process will take a few minutes.
 
@@ -556,11 +556,11 @@ The first step in processing streaming data was to create three streams on AWS K
 
 1. From the Kinesis dashboard, select 'Create data stream'.
 
-<img src="images/kinesis-dashboard.png" alt="kinesis dashboard screenshot" width="500">
+<img src="AWS_Images/kinesis-dashboard.png" alt="kinesis dashboard screenshot" width="500">
 
 2. Give the stream a name, and select 'Provisioned' capacity mode.
 
-<img src="images/create-stream.png" alt="create stream screenshot" width="500">
+<img src="AWS_Images/create-stream.png" alt="create stream screenshot" width="500">
 
 3. Click on 'Create data stream' to complete the process.
 
@@ -577,7 +577,7 @@ The settings used for the DELETE method were:
  - 'Action': '**DeleteStream**'
  - 'Execution role': 'arn of IAM role created'
 
-<img src="images/delete-method-settings-1.png" alt="delete method settings 1" width="600">
+<img src="AWS_Images/delete-method-settings-1.png" alt="delete method settings 1" width="600">
 
 In 'Integration Request' under 'HTTP Headers', add a new header:
 
@@ -596,7 +596,7 @@ Use the following code in the template:
 }
 ```
 
-<img src="images/delete-method-settings-2.png" alt="delete method settings 2" width="1000">
+<img src="AWS_Images/delete-method-settings-2.png" alt="delete method settings 2" width="1000">
 
 For the other methods, the same settings were used except for:
 
