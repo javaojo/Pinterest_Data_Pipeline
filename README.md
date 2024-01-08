@@ -1,4 +1,4 @@
-# pinterest-data-pipeline
+# Pinterest Data Pipeline
 
 ## Project Brief
 
