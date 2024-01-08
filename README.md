@@ -80,7 +80,7 @@ user_data:
 
 ## Architecture Overview
 
-<img src="images/CloudPinterestPipeline.png" alt="pinterest data pipeline overview"/>
+<img src="AWS_Images/CloudPinterestPipeline.png" alt="pinterest data pipeline overview"/>
 
 ## Building the pipeline
 
