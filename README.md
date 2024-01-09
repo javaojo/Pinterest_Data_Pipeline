@@ -21,7 +21,7 @@ command, ensuring that env.yml is present in the project:
 
 ## The data
 
-To emulate the kind of data that Pinterest's engineers are likely to work with, this project contains a script, [user_posting_emulation_to_console.py](user_posting_scripts/user_posting_emulation_to_console.py) that when run from the terminal mimics the stream of random data points received by the Pinterest API when POST requests are made by users uploading data to Pinterest.
+To emulate the kind of data that Pinterest's engineers are likely to work with, this project contains a script, [user_posting_emulation.py](https://github.com/javaojo/pinterest_data_pipeline/blob/master/User%20Posting%20Scripts/user_posting_emulation.py) that when run from the terminal mimics the stream of random data points received by the Pinterest API when POST requests are made by users uploading data to Pinterest.
 
 Running the script instantiates a database connector class, which is used to connect to an AWS RDS database containing the following tables:
 
@@ -364,9 +364,9 @@ This completes the process and an invoke URL is generated that can then be used 
 
 ### Sending messages to the cluster using the API gateway
 
-Running the script [user_posting_emulation_batch_data.py](user_posting_scripts/user_posting_emulation_batch_data.py) will emulate a stream of messages and post those messages to the cluster via the API gateway and the Kafka REST proxy.
+Running the script [user_posting_emulation.py](https://github.com/javaojo/pinterest_data_pipeline/blob/master/User%20Posting%20Scripts/user_posting_emulation.py) will emulate a stream of messages and post those messages to the cluster via the API gateway and the Kafka REST proxy.
 
-In order to access the messages in each topic in the cluster, I have used Kafka Connect, using AWS MSK Connect, to connect the cluster to an AWS S3 bucket into which messages can be deposited.
+To access the messages in each topic in the cluster, I have used Kafka Connect, using AWS MSK Connect, to connect the cluster to an AWS S3 bucket into which messages can be deposited.
 
 ### Connecting the Apache cluster to AWS S3 bucket
 
@@ -525,7 +525,7 @@ Once the connector creation process is complete, you should be able to see any m
 
 ## Batch processing data using Apache Spark on Databricks
 
-To batch process the data on Databricks, it's necessary to mount the S3 bucket on the platform. The file [mount_s3_and_get_data.ipynb](databricks_notebooks/mount_s3_and_get_data.ipynb) is a notebook that was run on the Databricks platform. The steps carried out in the notebook are:
+To batch process the data on Databricks, it's necessary to mount the S3 bucket on the platform. The file [Mount_AWS_S3_Bucket_to_Databricks.ipynb](https://github.com/javaojo/pinterest_data_pipeline/blob/master/Databricks%20Notebook/Mount_AWS_S3_Bucket_to_Databricks.ipynb) is a notebook that was run on the Databricks platform. The steps carried out in the notebook are:
 
 1. Import necessary libraries
 2. List tables in Databricks filestore to obtain AWS credentials file name
@@ -538,15 +538,15 @@ To batch process the data on Databricks, it's necessary to mount the S3 bucket o
 
 ### Clean data using Apache Spark on Databricks
 
-The file [clean_batch_data.ipynb](databricks_notebooks/clean_batch_data.ipynb) contains the code for performing the necessary cleaning of the dataframes created using the steps above. On Databricks, this code is hosted in a single notebook, and the cleaning steps occur between steps 7. and 8. above.
+The file [clean_batch_data.ipynb](https://github.com/javaojo/pinterest_data_pipeline/blob/master/Databricks%20Notebook/Clean_Data_Batch.ipynb) contains the code for performing the necessary cleaning of the dataframes created using the steps above. On Databricks, this code is hosted in a single notebook, and the cleaning steps occur between steps 7. and 8. above.
 
 ### Querying the data using Apache Spark on Databricks
 
-The file [query_batch_data.ipynb](databricks_notebooks/query_batch_data.ipynb) contains the code for querying the dataframes and returning specific insights about the data. On Databricks, this code was run after the cleaning steps above.
+The file [query_batch_data.ipynb](https://github.com/javaojo/pinterest_data_pipeline/blob/master/Databricks%20Notebook/Query_Data_Batch.ipynb) contains the code for querying the dataframes and returning specific insights about the data. On Databricks, this code was run after the cleaning steps above.
 
 ### Orchestrating automated workflow of notebook on Databricks
 
-MWAA was used to automate the process of running the batch processing on Databricks. The file [0ae9e110c9db_dag.py](0ae9e110c9db_dag.py) is the Python code for a directed acyclic graph (DAG) that orchestrates the running of the batch processing notebook described above. The file was uploaded to the MWAA environment, where Airflow is utilised to connect to and run the Databricks notebook at scheduled intervals, in this case `@daily`.
+MWAA was used to automate the process of running the batch processing on Databricks. The file [0ae9e110c9db_dag.py](https://github.com/javaojo/pinterest_data_pipeline/blob/master/User%20Posting%20Scripts/0ae9e110c9db_dag.py) is the Python code for a directed acyclic graph (DAG) that orchestrates the running of the batch processing notebook described above. The file was uploaded to the MWAA environment, where Airflow is utilised to connect to and run the Databricks notebook at scheduled intervals, in this case `@daily`.
 
 ## Processing streaming data
 
@@ -659,11 +659,11 @@ After creating the new resources and methods, the API must be redeployed.
 
 ### Sending data to the Kinesis streams
 
-Running the script [user_posting_emulation_stream_data.py](user_posting_scripts/user_posting_emulation_stream_data.py) starts an infinite loop that, like in the examples above, retrieves records from the RDS database and sends them via the new API to Kinesis.
+Running the script [user_posting_emulation_stream_data.py](https://github.com/javaojo/pinterest_data_pipeline/blob/master/User%20Posting%20Scripts/user_posting_emulation_streaming.py) starts an infinite loop that, like in the examples above, retrieves records from the RDS database and sends them via the new API to Kinesis.
 
 ### Processing the streaming data in Databricks
 
-The Jupyter notebook [process_kinesis_streaming_data.ipynb](databricks_notebooks/process_kinesis_streaming_data.ipynb) contains all the code necessary for retrieving the streams from Kinesis, transforming (cleaning) the data, and then loading the data into Delta tables on the Databricks cluster. The steps taken in the code are:
+The Jupyter notebook [process_kinesis_streaming_data.ipynb](https://github.com/javaojo/pinterest_data_pipeline/blob/master/Databricks%20Notebook/Kinesis_Streaming_Data.ipynb) contains all the code necessary for retrieving the streams from Kinesis, transforming (cleaning) the data, and then loading the data into Delta tables on the Databricks cluster. The steps taken in the code are:
 
 1. Import necessary functions and types
 2. List tables in Databricks filestore to obtain AWS credentials file name
