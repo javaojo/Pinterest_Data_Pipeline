@@ -677,9 +677,3 @@ The Jupyter notebook [process_kinesis_streaming_data.ipynb](https://github.com/j
 9. Clean all three streams
 10. Display the streams
 11. Write the streams to Delta tables
-
-## Next steps
-
-To take this project further, I think it would be a good idea to further query the streaming data and visualise the data using a tool such as Tableau or Power BI. To further 'production-ise' the code, I'd need to tighten up the IAM policies described above.
-
-
