@@ -525,10 +525,10 @@ Once the connector creation process is complete, you should be able to see any m
 
 ## Batch processing data using Apache Spark on Databricks
 
-In order to batch process the data on Databricks, it's necessary to mount the S3 bucket on the platform. The file [mount_s3_and_get_data.ipynb](databricks_notebooks/mount_s3_and_get_data.ipynb) is a notebook that was run on the Databricks platform. The steps carried out in the notebook are:
+To batch process the data on Databricks, it's necessary to mount the S3 bucket on the platform. The file [mount_s3_and_get_data.ipynb](databricks_notebooks/mount_s3_and_get_data.ipynb) is a notebook that was run on the Databricks platform. The steps carried out in the notebook are:
 
 1. Import necessary libraries
-2. List tables in Databricks filestore in order to obtain AWS credentials file name
+2. List tables in Databricks filestore to obtain AWS credentials file name
 3. Read the credentials .csv into a Spark dataframe
 4. Generate credential variables from Spark dataframe
 5. Mount the S3 bucket containing the messages from the Kafka topics
@@ -546,7 +546,7 @@ The file [query_batch_data.ipynb](databricks_notebooks/query_batch_data.ipynb) c
 
 ### Orchestrating automated workflow of notebook on Databricks
 
-MWAA was used to automate the process of running the batch processing on Databricks. The file [1215be80977f_dag.py](1215be80977f_dag.py) is the Python code for a directed acyclic graph (DAG) that orchestrates the running of the batch processing notebook described above. The file was uploaded to the MWAA environment, where Airflow is utilised to connect to and run the Databricks notebook at scheduled intervals, in this case `@daily`.
+MWAA was used to automate the process of running the batch processing on Databricks. The file [0ae9e110c9db_dag.py](0ae9e110c9db_dag.py) is the Python code for a directed acyclic graph (DAG) that orchestrates the running of the batch processing notebook described above. The file was uploaded to the MWAA environment, where Airflow is utilised to connect to and run the Databricks notebook at scheduled intervals, in this case `@daily`.
 
 ## Processing streaming data
 
@@ -566,7 +566,7 @@ The first step in processing streaming data was to create three streams on AWS K
 
 ### Create API proxy for uploading data to streams
 
-It's possible to interact with the Kinesis streams using HTTP requests. In order to do this with the streams just added to Kinesis, I created new API resources on AWS API Gateway.
+It's possible to interact with the Kinesis streams using HTTP requests. To do this with the streams just added to Kinesis, I created new API resources on AWS API Gateway.
 
 The settings used for the DELETE method were:
 
@@ -666,9 +666,9 @@ Running the script [user_posting_emulation_stream_data.py](user_posting_scripts/
 The Jupyter notebook [process_kinesis_streaming_data.ipynb](databricks_notebooks/process_kinesis_streaming_data.ipynb) contains all the code necessary for retrieving the streams from Kinesis, transforming (cleaning) the data, and then loading the data into Delta tables on the Databricks cluster. The steps taken in the code are:
 
 1. Import necessary functions and types
-2. List tables in Databricks filestore in order to obtain AWS credentials file name
+2. List tables in Databricks filestore to obtain AWS credentials file name
 3. Read the credentials .csv into a Spark dataframe
-4. Generate credential variables from Spark dataframe
+4. Generate credential variables from the Spark dataframe
 5. Define functions for:
     - getting streams from Kinesis using spark.readStream - returns dataframe with stream info and data in binary format
     - deserialising the stream data - converts the binary data format to a dataframe using schema defined above
