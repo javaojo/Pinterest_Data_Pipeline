@@ -111,7 +111,7 @@ Once the cluster is up and running, a client is needed to communicate with it. I
 2. Give the instance a name, e.g. 'pinterest-kafka-client'.
 3. Keep the default Application and OS AWS_Images, and instance type. Again, this choice may be determined by usage and cost considerations.
 
-<img src="AWS_Images/ec2-OS-AWS_Images.png" alt="ec2 OS image options" width="500"/>
+<img src="https://raw.githubusercontent.com/javaojo/pinterest_data_pipeline/master/AWS_Images/ec2-OS-images.png" alt="ec2 OS image options" width="500"/>
 
 4. Create a new keypair for connecting securely to the instance via SSH. Give the keypair a descriptive name and choose 'RSA' and '.pem' for the type and file format, respectively. The .pem file will automatically download - keep this file safe for later use.
 
