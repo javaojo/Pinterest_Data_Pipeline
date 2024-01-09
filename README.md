@@ -657,7 +657,7 @@ After creating the new resources and methods, the API must be redeployed.
 
 ### Sending data to the Kinesis streams
 
-Running the script [user_posting_emulation_stream_data.py](https://github.com/javaojo/pinterest_data_pipeline/blob/master/User%20Posting%20Scripts/user_posting_emulation_streaming.py) starts an infinite loop that, like in the examples above, retrieves records from the RDS database and sends them via the new API to Kinesis.
+Running the script [user_posting_emulation_streaming.py](https://github.com/javaojo/pinterest_data_pipeline/blob/master/User%20Posting%20Scripts/user_posting_emulation_streaming.py) starts an infinite loop that, like in the examples above, retrieves records from the RDS database and sends them via the new API to Kinesis.
 
 ### Processing the streaming data in Databricks
 
